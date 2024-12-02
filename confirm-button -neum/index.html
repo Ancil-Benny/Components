@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Button</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e0e0e0;
+            font-family: Arial, sans-serif;
+        }
+        .button-container {
+            position: relative;
+        }
+        .button {
+            background-color: #e0e0e0;
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 12px;
+            box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+            transition: all 0.3s ease;
+        }
+        .button.confirm {
+            background-color: #e0e0e0;
+            color: #ff0000;
+            box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+        }
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+        }
+        .button:active {
+            box-shadow: inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button id="confirmButton" class="button">Click Me</button>
+    </div>
+
+    <script>
+        const button = document.getElementById('confirmButton');
+        let confirmMode = false;
+        let confirmTimeout;
+
+        button.addEventListener('click', () => {
+            if (confirmMode) {
+                alert('Button Pressed!');
+                resetButton();
+            } else {
+                button.classList.add('confirm');
+                button.textContent = 'Confirm?';
+                confirmMode = true;
+                confirmTimeout = setTimeout(resetButton, 3000);
+            }
+        });
+
+        function resetButton() {
+            button.classList.remove('confirm');
+            button.textContent = 'Click Me';
+            confirmMode = false;
+            clearTimeout(confirmTimeout);
+        }
+    </script>
+</body>
+</html>
